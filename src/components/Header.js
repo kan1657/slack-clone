@@ -4,11 +4,16 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import SearchIcon from "@mui/icons-material/Search";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import { auth } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 function Header() {
+  const [user] = useAuthState(auth);
+  console.log(user);
   return (
     <HeaderContainer>
       <HeaderLeft>
-        <HeaderAvatar />
+        <HeaderAvatar onClick={() => auth.signOut()} src={user?.photoURL} />
         <AccessTimeIcon sx={{ color: "white" }} />
       </HeaderLeft>
       <HeaderSearch>
